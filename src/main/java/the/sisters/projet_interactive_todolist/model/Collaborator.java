@@ -32,50 +32,24 @@ public class Collaborator {
     private String passwd;
 
     @ManyToMany
+    @JoinTable(
+            name = "collaboratorCategory",
+            joinColumns = @JoinColumn(name = "collaboratorId"),
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private List<Category> categories;
     @ManyToMany
+    @JoinTable(
+            name = "collaboratorTask",
+            joinColumns = @JoinColumn(name = "collaboratorId"),
+            inverseJoinColumns = @JoinColumn(name = "taskId"))
     private List<Task> tasks;
 
     @ManyToMany
+    @JoinTable(
+            name = "projectcollaborator",
+            joinColumns = @JoinColumn(name = "collaboratorId"),
+            inverseJoinColumns = @JoinColumn(name = "projectId"))
     private List<Project> projects;
 
-    public Integer getCollaboratorId() {
-        return this.collaboratorId;
-    }
 
-    public void setCollaboratorId(Integer collaboratorId) {
-        this.collaboratorId = collaboratorId;
-    }
-
-    public String getFirstname() {
-        return this.firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return this.lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswd() {
-        return this.passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
 }

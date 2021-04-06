@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.List;
 public class Task {
     @Id
     @Column(name = "taskId")
-    private Integer taskId;
+    private int taskId;
 
     @Column(name = "name")
     private String name;
@@ -26,13 +27,13 @@ public class Task {
     private String description;
 
     @Column(name = "start")
-    private java.sql.Date start;
+    private Date start;
 
     @Column(name = "end")
-    private java.sql.Date end;
+    private Date end;
 
     @Column(name = "completed")
-    private Byte completed;
+    private boolean completed;
 
     @Column(name = "projectId")
     private Integer projectId;
@@ -40,69 +41,13 @@ public class Task {
     @ManyToMany
     @JoinTable(
             name = "taskcategory",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+            joinColumns = @JoinColumn(name = "taskId"),
+            inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private List<Category> categories;
     @ManyToMany
     @JoinTable(
-            name = "course_like",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
+            name = "collaboratortask",
+            joinColumns = @JoinColumn(name = "taskId"),
+            inverseJoinColumns = @JoinColumn(name = "collaboratorId"))
     private List<Collaborator> collaborators;
-
-    public Integer getTaskId() {
-        return this.taskId;
-    }
-
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public java.sql.Date getStart() {
-        return this.start;
-    }
-
-    public void setStart(java.sql.Date start) {
-        this.start = start;
-    }
-
-    public java.sql.Date getEnd() {
-        return this.end;
-    }
-
-    public void setEnd(java.sql.Date end) {
-        this.end = end;
-    }
-
-    public Byte getCompleted() {
-        return this.completed;
-    }
-
-    public void setCompleted(Byte completed) {
-        this.completed = completed;
-    }
-
-    public Integer getProjectId() {
-        return this.projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
 }
