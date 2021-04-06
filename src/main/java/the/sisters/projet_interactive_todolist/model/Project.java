@@ -27,35 +27,5 @@ public class Project {
     @Column(name = "managerId")
     private Integer managerId;
 
-    public Integer getProjectId() {
-        return this.projectId;
-    }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getManagerId() {
-        return this.managerId;
-    }
-
-    public void setManagerId(Integer managerId) {
-        this.managerId = managerId;
-    }
 }
