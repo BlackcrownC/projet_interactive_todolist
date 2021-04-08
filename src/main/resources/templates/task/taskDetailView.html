@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Detail</title>
+    <link th:href="@{/static/assets/css/style1.css}" rel="stylesheet" />
+</head>
+<body>
+<!-- HEADER -->
+<div id="manager" th:replace="${path}::top-nav"></div>
+<!-- BODY -->
+<h1>Détail de la tâche : <span th:text="${task.taskId}"></span></h1>
+<p>Name: <span th:text="${task.name}"></span></p>
+<p>Start: <span th:text="${task.start}"></span></p>
+<p>End: <span th:text="${task.end}"></span></p>
+<p>Completed: <span th:text="${task.completed}"></span></p>
+<p>Description: <span th:text="${task.description}"></span></p>
+<!-- FOOTER -->
+<footer th:replace="fragment/footer::footer"></footer>
+</body>
+</html>
