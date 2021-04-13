@@ -1,0 +1,23 @@
+.corners {
+    border-radius: 25px;
+    #border: 1px solid deepskyblue;
+
+    width: 400px;
+    height: 600px;
+
+}
+button {
+    font-family: fantasy;
+    font-size: 12px;
+}
+.flower {
+    background-image: url("../img/flower.png");
+    width: 100%;
+    height: 93%;
+
+}
+.wave {
+    background-image: url("../img/flowe2.png");
+    width: 100%;
+    height: 93%;
+}

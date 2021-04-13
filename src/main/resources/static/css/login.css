@@ -1,0 +1,8 @@
+.driedFlower {
+    background-image: url("../img/dried-flower-png.png");
+    width: 100%;
+    height: 93%;
+    border-radius: 25px;
+    border: 1px solid deepskyblue;
+
+}

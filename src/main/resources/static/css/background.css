@@ -1,0 +1,7 @@
+.center {
+    max-width: 500px;
+    margin: auto;
+}
+body {
+    background-image: url('../img/backgroundImg.jpg');
+}

@@ -7,14 +7,8 @@ table, th, td {
 tr:hover {background-color:#ffff99;}
 
 tr:nth-child(even) {background-color: #f2f2f2;}
-
-#container{
-    position: relative;
-}
 .footer {
-    position: absolute;
     bottom: 0;
-    left: 0;
 }
 
 ul {
