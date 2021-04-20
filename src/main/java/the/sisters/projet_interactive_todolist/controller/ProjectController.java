@@ -47,14 +47,15 @@ public class ProjectController {
         return "task/taskDetailView";
 
     }
-    @GetMapping("/project/Calendar")//for employee
-    public String getAllTaskForEmployee(Model model, CollaboratorIdViewModel collaboratorIdViewModel){
+    @GetMapping("/project/calendar")//for employee
+    public String getAllTaskForEmployee(Model model){
 
-        Optional<Task> task= taskService.readOne(collaboratorIdViewModel.getId());
 
-        model.addAttribute("task",task.get());
+        return "project/collaboratorView";
 
-        return "task/taskDetailView";
-
+    }
+    @GetMapping("/project/addTask")
+    public String addTask(Model model){
+        return "task/addTaskView";
     }
 }
