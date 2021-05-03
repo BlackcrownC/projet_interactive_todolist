@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "task")
 public class Task {
     @Id
-    @Column(name = "taskId")
+    @Column(name = "task_id")
     private int taskId;
 
     @Column(name = "name")
@@ -29,25 +29,25 @@ public class Task {
     @Column(name = "start")
     private Date start;
 
-    @Column(name = "end")
+    @Column(name = "finish")
     private Date end;
 
     @Column(name = "completed")
     private boolean completed;
 
-    @Column(name = "projectId")
+    @Column(name = "project_id")
     private Integer projectId;
 
     @ManyToMany
     @JoinTable(
             name = "taskcategory",
-            joinColumns = @JoinColumn(name = "taskId"),
-            inverseJoinColumns = @JoinColumn(name = "categoryId"))
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
     @ManyToMany
     @JoinTable(
             name = "collaboratortask",
-            joinColumns = @JoinColumn(name = "taskId"),
-            inverseJoinColumns = @JoinColumn(name = "collaboratorId"))
+            joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "collaborator_id"))
     private List<Collaborator> collaborators;
 }

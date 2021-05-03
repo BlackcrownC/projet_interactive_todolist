@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "category")
 public class Category {
     @Id
-    @Column(name = "categoryId")
+    @Column(name = "category_id")
     private Integer categoryId;
 
     @Column(name = "name")

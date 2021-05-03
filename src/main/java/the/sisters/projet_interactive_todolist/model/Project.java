@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "project")
 public class Project {
     @Id
-    @Column(name = "projectId")
+    @Column(name = "project_id")
     private Integer projectId;
 
     @Column(name = "name")
@@ -24,7 +24,7 @@ public class Project {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "managerId")
+    @Column(name = "manager_id")
     private Integer managerId;
 
 
