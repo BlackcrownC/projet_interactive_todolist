@@ -19,7 +19,7 @@
             <div>
                 <article>
                     <h4 class="card-title mb-4 mt-1">Add task</h4>
-                    <form>
+                    <form method="post" th:action="@{/project/saveTask}">
                         <div class="form-group">
                             <label>Task name</label>
                             <input name="taskName" class="form-control" placeholder="taskName" type="text">
@@ -53,9 +53,9 @@
                         <div class="form-group">
                             <label>Work related categories</label>
                             <div class="checkbox">
-                                <label> <input type="checkbox"> Programmer </label><br>
-                                <label> <input type="checkbox"> Artist </label><br>
-                                <label> <input type="checkbox"> Designer </label><br>
+                                <label> <input type="checkbox" id="programmerCheck"> Programmer </label><br>
+                                <label> <input type="checkbox" id="artistCheck"> Artist </label><br>
+                                <label> <input type="checkbox" id="designerCheck"> Designer </label><br>
                             </div> <!-- checkbox .// -->
                         </div> <!-- form-group// -->
                         <div class="form-group">

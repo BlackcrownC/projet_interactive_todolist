@@ -2,8 +2,12 @@ package the.sisters.projet_interactive_todolist.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import the.sisters.projet_interactive_todolist.model.Category;
 import the.sisters.projet_interactive_todolist.repository.Interfaces.ICategoryRepository;
 import the.sisters.projet_interactive_todolist.service.ICategoryService;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -11,5 +15,14 @@ public class CategoryService implements ICategoryService {
     @Autowired
     public CategoryService(ICategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
+    }
+
+    @Override
+    public Optional<Category> readOne(int id) {
+        return categoryRepository.findById(id);
+    }
+    @Override
+    public List<Category> readAll() {
+        return categoryRepository.findAll();
     }
 }
