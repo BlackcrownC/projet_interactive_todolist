@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -21,34 +21,37 @@
             <div class="driedFlower">
                 <article>
                     <h4 class="card-title mb-4 mt-1">Sign in</h4>
-                    <form>
+                    <form method="post" th:action="@{/login/newaccount}" th:object="${newCollaborator}" action="#">
                         <div class="form-group">
                             <label>First name</label>
-                            <input name="" class="form-control" placeholder="Name" type="text">
+                            <input th:field="*{firstname}" name="" class="form-control" placeholder="Name" type="text">
                         </div> <!-- form-group// -->
                         <div class="form-group">
                             <label>Last name</label>
-                            <input name="" class="form-control" placeholder="Name" type="text">
+                            <input th:field="*{lastname}" name="" class="form-control" placeholder="Name" type="text">
                         </div> <!-- form-group// -->
                         <div class="form-group">
                             <label>Your email</label>
-                            <input name="" class="form-control" placeholder="Email" type="email">
+                            <input th:field="*{email}" name="" class="form-control" placeholder="Email" type="email">
                         </div> <!-- form-group// -->
+
+                        <!--           Password verification to do              -->
+
                         <div class="form-group">
                             <label>Your password</label>
-                            <input class="form-control" placeholder="******" type="password">
+                            <input th:field="*{passwd}" class="form-control" placeholder="******" type="password">
                         </div> <!-- form-group// -->
                         <div class="form-group">
                             <label>What are you?</label>
                             <div class="checkbox">
-                                <label> <input type="checkbox"> Programmer </label><br>
-                                <label> <input type="checkbox"> Artist </label><br>
-                                <label> <input type="checkbox"> Designer </label><br>
-                                <label> <input type="checkbox"> Manager </label>
+                                <label> <input th:field="*{categories[0]}" type="checkbox"> Programmer </label><br>
+                                <label> <input th:field="*{categories[1]}" type="checkbox"> Artist </label><br>
+                                <label> <input th:field="*{categories[2]}" type="checkbox"> Designer </label><br>
+                                <label> <input th:field="*{categories[3]}" type="checkbox"> Manager </label>
                             </div> <!-- checkbox .// -->
                         </div> <!-- form-group// -->
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                            <button type="submit" class="btn btn-primary btn-block"> Sign up  </button>
                         </div> <!-- form-group// -->
                     </form>
                 </article>

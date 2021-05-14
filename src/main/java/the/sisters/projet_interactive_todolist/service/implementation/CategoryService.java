@@ -25,4 +25,29 @@ public class CategoryService implements ICategoryService {
     public List<Category> readAll() {
         return categoryRepository.findAll();
     }
+
+    @Override
+    public Category create(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    @Override
+    public Optional<Category> readOne(int id) {
+        return categoryRepository.findById(id);
+    }
+
+    @Override
+    public List<Category> readAll() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category save(Category category) {
+        return categoryRepository.save(category);
+    }
+
+    @Override
+    public void update(Category category) {
+        categoryRepository.save(category);
+    }
 }
