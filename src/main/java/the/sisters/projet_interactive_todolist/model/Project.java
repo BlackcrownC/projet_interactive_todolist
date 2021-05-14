@@ -25,9 +25,6 @@ public class Project {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @Column(name = "manager_id")
-    private Collaborator manager;
 
 
 }

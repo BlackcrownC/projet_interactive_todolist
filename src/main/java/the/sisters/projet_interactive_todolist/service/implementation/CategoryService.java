@@ -32,16 +32,6 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Optional<Category> readOne(int id) {
-        return categoryRepository.findById(id);
-    }
-
-    @Override
-    public List<Category> readAll() {
-        return categoryRepository.findAll();
-    }
-
-    @Override
     public Category save(Category category) {
         return categoryRepository.save(category);
     }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import the.sisters.projet_interactive_todolist.model.Project;
 import the.sisters.projet_interactive_todolist.repository.Interfaces.IProjectRepository;
 import the.sisters.projet_interactive_todolist.service.IProjectService;
+import java.util.Optional;
 
 @Service
 public class ProjectService implements IProjectService {
@@ -15,7 +16,7 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public Project readOne(int projectId) {
+    public Optional<Project> readOne(int projectId) {
         return projectRepository.findById(projectId);
     }
 }

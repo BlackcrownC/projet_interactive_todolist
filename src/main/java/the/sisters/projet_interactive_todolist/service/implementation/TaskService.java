@@ -40,7 +40,7 @@ public class TaskService implements ITaskService {
         task.setEnd(taskDto.getEnd());
         task.setStart(taskDto.getStart());
         task.setCompleted(false);
-        task.setProject(projectService.readOne(projectId));
+        task.setProject(projectService.readOne(projectId).orElse(null));
         List<Category> categories = new ArrayList<>();
         if(taskDto.isProgrammer()){ categories.add(categoryService.readAll().stream().filter(x -> x.getCategoryId()==1).findFirst().orElse(null)); }
         if(taskDto.isArtist()){ categories.add(categoryService.readAll().stream().filter(x -> x.getCategoryId()==2).findFirst().orElse(null)); }
