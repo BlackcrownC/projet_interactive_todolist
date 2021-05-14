@@ -18,6 +18,7 @@ import java.util.List;
 @Table(name = "collaborator")
 public class Collaborator {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "collaborator_id")
     private Integer collaboratorId;
 
@@ -38,6 +39,9 @@ public class Collaborator {
 
     @Column(name = "permissions")
     private String permissions = "";
+
+    @Column(name = "active")
+    private boolean active = true;
 
     @ManyToMany
     @JoinTable(

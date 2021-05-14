@@ -17,6 +17,7 @@ import java.util.List;
 @Table(name = "task")
 public class Task {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private int taskId;
 

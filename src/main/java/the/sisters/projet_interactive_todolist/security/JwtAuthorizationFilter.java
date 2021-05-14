@@ -7,6 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import the.sisters.projet_interactive_todolist.model.Collaborator;
+import the.sisters.projet_interactive_todolist.repository.Interfaces.ICollaboratorRepository;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -15,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-    private final UserRepository userRepository;
+    private final ICollaboratorRepository userRepository;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, ICollaboratorRepository userRepository) {
         super(authenticationManager);
         this.userRepository = userRepository;
     }
@@ -38,17 +40,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private Authentication getUsernamePasswordAuthentication(HttpServletRequest request) {
         String token = request.getHeader(JwtProperties.HEADER_STRING);
         if (token != null) {
-            String username = JWT
+            String email = JWT
                     .require(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()))
                     .build()
                     .verify(token.replace(JwtProperties.TOKEN_PREFIX, ""))
                     .getSubject();
 
-            if (username != null) {
-                User user = userRepository.findOneByUsername(username)
-                        .orElseThrow(() -> new IllegalArgumentException("User login not found " + username));
+            if (email != null) {
+                Collaborator user = userRepository.findOneByEmail(email)
+                        .orElseThrow(() -> new IllegalArgumentException("User login not found " + email));
                 UserPrincipal principal = new UserPrincipal(user);
-                return new UsernamePasswordAuthenticationToken(username, null, principal.getAuthorities());
+                return new UsernamePasswordAuthenticationToken(email, null, principal.getAuthorities());
             }
         }
         return null;
