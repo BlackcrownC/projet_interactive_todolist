@@ -35,8 +35,10 @@ public class Task {
     @Column(name = "completed")
     private boolean completed;
 
+
+    @ManyToOne
     @Column(name = "project_id")
-    private Integer projectId;
+    private Project project;
 
     @ManyToMany
     @JoinTable(

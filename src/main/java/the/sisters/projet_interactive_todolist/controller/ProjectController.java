@@ -5,9 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import the.sisters.projet_interactive_todolist.controller.viewModel.TypeViewModel;
 import the.sisters.projet_interactive_todolist.model.Collaborator;
-import the.sisters.projet_interactive_todolist.model.Project;
 import the.sisters.projet_interactive_todolist.model.Task;
 import the.sisters.projet_interactive_todolist.model.dto.TaskDto;
 import the.sisters.projet_interactive_todolist.service.implementation.CategoryService;
@@ -43,9 +41,9 @@ public class ProjectController {
         return  "project/managerView";
     }
     @GetMapping("/project/{project_id}/task/{id}")
-    public String getTask(Model model, @PathVariable int id,@PathVariable int project_id, TypeViewModel typeViewModel){
+    public String getTask(Model model, @PathVariable int id,@PathVariable int project_id){
         String path;
-        if(typeViewModel.isManager()){
+        if(){
             path = "fragment/headerManager";
         }
         else {

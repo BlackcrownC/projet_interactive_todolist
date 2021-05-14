@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -31,6 +33,12 @@ public class Collaborator {
     @Column(name = "passwd")
     private String passwd;
 
+    @Column(name = "roles")
+    private String roles = "";
+
+    @Column(name = "permissions")
+    private String permissions = "";
+
     @ManyToMany
     @JoinTable(
             name = "collaborator_category",
@@ -51,5 +59,17 @@ public class Collaborator {
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects;
 
+    public List<String> getRolesList() {
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
+    }
 
+    public List<String> getPermissionsList() {
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
+    }
 }
