@@ -4,9 +4,11 @@ package the.sisters.projet_interactive_todolist.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import the.sisters.projet_interactive_todolist.model.Collaborator;
+import the.sisters.projet_interactive_todolist.model.dto.CollaboratorDTO;
 import the.sisters.projet_interactive_todolist.repository.Interfaces.ICollaboratorRepository;
 import the.sisters.projet_interactive_todolist.service.ICollaboratorService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +17,31 @@ public class CollaboratorService implements ICollaboratorService {
     @Autowired
     public CollaboratorService(ICollaboratorRepository collaboratorRepository) {
         this.collaboratorRepository = collaboratorRepository;
+    }
+
+    @Override
+    public Collaborator create(CollaboratorDTO collaborator) {
+        return null;
+    }
+
+    @Override
+    public Optional<Collaborator> readOne(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Collaborator> readAll() {
+        return null;
+    }
+
+    @Override
+    public Collaborator save(Collaborator collaborator) {
+        return null;
+    }
+
+    @Override
+    public void update(Collaborator collaborator) {
+
     }
 
     @Override

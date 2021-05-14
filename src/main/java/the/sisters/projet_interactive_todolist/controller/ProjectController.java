@@ -42,13 +42,13 @@ public class ProjectController {
     }
     @GetMapping("/project/{project_id}/task/{id}")
     public String getTask(Model model, @PathVariable int id,@PathVariable int project_id){
-        String path;
-        if(){
+        String path=null;
+        /*if(){
             path = "fragment/headerManager";
         }
         else {
             path = "fragment/headerEmployee";
-        }
+        }*/
         Optional<Task> task= taskService.readOne(id);
         model.addAttribute("project_id",project_id);
         model.addAttribute("task",task.get());

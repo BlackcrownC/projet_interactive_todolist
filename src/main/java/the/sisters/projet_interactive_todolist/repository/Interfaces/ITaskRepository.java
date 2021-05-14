@@ -5,3 +5,4 @@ import the.sisters.projet_interactive_todolist.model.Task;
 
 public interface ITaskRepository extends JpaRepository<Task, Integer> {
 }
+

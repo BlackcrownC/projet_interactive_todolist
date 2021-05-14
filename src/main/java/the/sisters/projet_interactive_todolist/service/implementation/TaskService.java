@@ -16,10 +16,12 @@ import java.util.Optional;
 public class TaskService implements ITaskService {
     private final ITaskRepository taskRepository;
     private final CategoryService categoryService;
+    private final ProjectService projectService;
     @Autowired
-    public TaskService(ITaskRepository taskRepository, CategoryService categoryService) {
+    public TaskService(ITaskRepository taskRepository, CategoryService categoryService, ProjectService projectService) {
         this.taskRepository = taskRepository;
         this.categoryService = categoryService;
+        this.projectService = projectService;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TaskService implements ITaskService {
         task.setEnd(taskDto.getEnd());
         task.setStart(taskDto.getStart());
         task.setCompleted(false);
-        task.setProjectId(projectId);
+        task.setProject(projectService.readOne(projectId));
         List<Category> categories = new ArrayList<>();
         if(taskDto.isProgrammer()){ categories.add(categoryService.readAll().stream().filter(x -> x.getCategoryId()==1).findFirst().orElse(null)); }
         if(taskDto.isArtist()){ categories.add(categoryService.readAll().stream().filter(x -> x.getCategoryId()==2).findFirst().orElse(null)); }

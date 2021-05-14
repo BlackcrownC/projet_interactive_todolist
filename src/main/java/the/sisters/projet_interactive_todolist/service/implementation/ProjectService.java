@@ -2,6 +2,7 @@ package the.sisters.projet_interactive_todolist.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import the.sisters.projet_interactive_todolist.model.Project;
 import the.sisters.projet_interactive_todolist.repository.Interfaces.IProjectRepository;
 import the.sisters.projet_interactive_todolist.service.IProjectService;
 
@@ -11,5 +12,10 @@ public class ProjectService implements IProjectService {
     @Autowired
     public ProjectService(IProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
+    }
+
+    @Override
+    public Project readOne(int projectId) {
+        return projectRepository.findById(projectId);
     }
 }
