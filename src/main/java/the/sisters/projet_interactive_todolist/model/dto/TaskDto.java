@@ -11,11 +11,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskDto {
-    private int taskId;
     private String name;
     private String description;
-    private Date start;
-    private Date end;
+    private String start;
+    private String end;
     private Integer projectId;
     private boolean programmer;
     private boolean artist;

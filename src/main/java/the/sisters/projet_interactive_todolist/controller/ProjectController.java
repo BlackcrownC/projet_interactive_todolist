@@ -13,6 +13,8 @@ import the.sisters.projet_interactive_todolist.service.implementation.Collaborat
 import the.sisters.projet_interactive_todolist.service.implementation.ProjectService;
 import the.sisters.projet_interactive_todolist.service.implementation.TaskService;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -34,47 +36,34 @@ public class ProjectController {
 
     @GetMapping("/project/{project_id}/task_list")//for manager
     public String getAllTaskForManager(Model model){
-        List<Task> tasks = taskService.readAll();
+        List<Task> tasksWithNoCollab = taskService.readAll();
+        List<Collaborator> collaborators = collaboratorService.readAll();
+        for(Collaborator c : collaborators){
+            for(Task task : c.getTasks()){
+                if(tasksWithNoCollab.contains(task)){
+                    tasksWithNoCollab.remove(task);
+                }
+            }
+        }
 
-        model.addAttribute("allTask", tasks);
+        model.addAttribute("collaborators",collaborators);
+        model.addAttribute("tasksWithNoCollab", tasksWithNoCollab);
+        model.addAttribute("currentDate", new Date());
 
         return  "project/managerView";
     }
-    @GetMapping("/project/{project_id}/task/{id}")
-    public String getTask(Model model, @PathVariable int id,@PathVariable int project_id){
-        String path=null;
-        /*if(){
-            path = "fragment/headerManager";
-        }
-        else {
-            path = "fragment/headerEmployee";
-        }*/
-        Optional<Task> task= taskService.readOne(id);
-        model.addAttribute("project_id",project_id);
-        model.addAttribute("task",task.get());
-        model.addAttribute("path", path);
 
-        return "task/taskDetailView";
+    @GetMapping("/project/{project_id}/employee")//for employee
+    public String getAllTaskForEmployee(Model model/*, @AuthenticationPrincipal String email*/){
 
-    }
-    @GetMapping("/project/{project_id}/calendar")//for employee
-    public String getAllTaskForEmployee(Model model){
+        List<Task> tasks = taskService.readAll();
 
+        model.addAttribute("tasks", tasks);
+
+        model.addAttribute("currentDate", new Date());
 
         return "project/collaboratorView";
 
-    }
-    @GetMapping("/project/{project_id}/addTask")
-    public String showAddTaskForm(Model model,@PathVariable int project_id){
-        model.addAttribute("project_id",project_id);
-        model.addAttribute("task", new TaskDto());
-        model.addAttribute("categories", categoryService.readAll());
-        return "task/addTaskView";
-    }
-    @PostMapping("/project/{project_id}/saveTask")
-    public String addUser(@Valid TaskDto taskDto, @PathVariable int project_id){
-        Task saved = taskService.save(taskDto, project_id);
-        return "redirect:/project/task_list)";
     }
     @GetMapping("/project")
     public String getProjects(Model model/*, @AuthenticationPrincipal String email*/){

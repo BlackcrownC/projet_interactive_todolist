@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -19,16 +19,16 @@
             <div>
                 <article>
                     <h4 class="card-title mb-4 mt-1">Add task</h4>
-                    <form method="post" th:action="@{/project/saveTask}">
+                    <form method="post" th:action="@{'/project/'+${project_id}+'/saveTask'}" th:object="${newTask}">
                         <div class="form-group">
                             <label>Task name</label>
-                            <input name="taskName" class="form-control" placeholder="taskName" type="text">
+                            <input name="taskName" th:field="*{name}" class="form-control" placeholder="taskName" type="text">
                         </div> <!-- form-group// -->
                         <div class="form-group">
                             <label>start : </label>
-                            <input type="date" id="start" name="start" onchange="lenghtChange()">
+                            <input type="date" id="start" name="start" th:field="*{start}"  onchange="lenghtChange()">
                             <label>end : </label>
-                            <input type="date" id="end" name="end" onchange="lenghtChange()">
+                            <input th:field="*{end}" type="date" id="end" name="end"   onchange="lenghtChange()">
                             <label id="length">length : </label>
                             <script>
                                 var d = new Date();
@@ -43,7 +43,6 @@
 
                                     var start =  new Date(document.getElementById("start").value)
                                     var end = new Date(document.getElementById("end").value)
-
                                     const Difference_In_Time = end - start;
                                     const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
                                     document.getElementById("length").innerHTML =  "Length : "+Difference_In_Days+" days" ;
@@ -53,15 +52,15 @@
                         <div class="form-group">
                             <label>Work related categories</label>
                             <div class="checkbox">
-                                <label> <input type="checkbox" id="programmerCheck"> Programmer </label><br>
-                                <label> <input type="checkbox" id="artistCheck"> Artist </label><br>
-                                <label> <input type="checkbox" id="designerCheck"> Designer </label><br>
+                                <label> <input th:field="*{programmer}" type="checkbox"> Programmer </label><br>
+                                <label> <input th:field="*{artist}" type="checkbox"> Artist </label><br>
+                                <label> <input th:field="*{designer}" type="checkbox"> Designer </label><br>
                             </div> <!-- checkbox .// -->
                         </div> <!-- form-group// -->
                         <div class="form-group">
                             <label>Description</label>
                             <br>
-                            <textarea cols="80" rows="10"  type="text" name="textbox">Enter your description</textarea>
+                            <textarea th:field="*{description}" cols="80" rows="10"  type="text" name="textbox">Enter your description</textarea>
                         </div> <!-- form-group// -->
                         <div class="form-group" >
                             <button type="submit" style="width: 50px" class="btn btn-primary btn-block">Add</button>
@@ -73,5 +72,6 @@
         </aside> <!-- col.// -->
     </div>
 </div>
-</html>
+
 </body>
+</html>

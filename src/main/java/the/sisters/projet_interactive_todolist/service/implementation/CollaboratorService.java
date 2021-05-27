@@ -26,12 +26,12 @@ public class CollaboratorService implements ICollaboratorService {
 
     @Override
     public Optional<Collaborator> readOne(int id) {
-        return Optional.empty();
+        return collaboratorRepository.findById(id);
     }
 
     @Override
     public List<Collaborator> readAll() {
-        return null;
+        return collaboratorRepository.findAll();
     }
 
     @Override

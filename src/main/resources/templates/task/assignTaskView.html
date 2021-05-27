@@ -7,27 +7,24 @@
     <link href="/css/background.css" rel="stylesheet" />
     <title>Title</title>
 </head>
+<body>
 <table class="table table-hover">
+    <div th:replace="fragment/headerManager::top-nav"></div>
     <thead class="text-warning" style="background-color: #03a9f3">
     <th>Id</th>
     <th>Name</th>
     <th>Start</th>
     <th>End</th>
-    <th>Completed</th>
-    <th>Description</th>
-
+    <th>Assign worker</th>
     </thead>
     <tbody>
 
-    <tr th:each="task:${tasks}">
-        <td th:text="${task.taskId}"></td>
-        <td th:text="${task.name}"></td>
+    <tr th:each="collab:${collaborators}">
+        <td th:text="${collab.getFirstname()}"></td>
+        <td th:text="${collab.getEmail()}"></td>
         <td th:text="${task.start}"></td>
         <td th:text="${task.end}"></td>
-        <td th:text="${task.completed}" th:if="${task.end<currentDate}" style="background-color: red;opacity: 50%"></td>
-        <td th:text="${task.completed}" th:if="${task.end>currentDate&&!task.isCompleted()}" style="background-color: yellow;opacity: 50%"></td>
-        <td th:text="${task.completed}" th:if="${task.completed}" style="background-color: green;opacity: 50%"></td>
-        <td><a th:text="Descrition" th:href="${'/project/'+project_id+'task/'+task.taskId}"></a></td>
+        <td><button th:text="Assign" type="submit" th:method='POST' th:action="@{'/project/1/assignTask/'+${task.taskId}+'/'+${collab.getCollaboratorId()}}"></button></td>
 
     </tr>
 

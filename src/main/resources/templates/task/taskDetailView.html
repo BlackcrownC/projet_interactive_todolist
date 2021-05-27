@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task Detail</title>
-    <link th:href="@{/static/assets/css/style1.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="/css/background.css" rel="stylesheet" />
+    <title>Title</title>
 </head>
 <body>
 <!-- HEADER -->
-<div id="manager" th:replace="${path}::top-nav"></div>
+<div th:replace="fragment/headerManager::top-nav"></div>
 <!-- BODY -->
 <h1>Détail de la tâche : <span th:text="${task.taskId}"></span></h1>
 <p>Name: <span th:text="${task.name}"></span></p>

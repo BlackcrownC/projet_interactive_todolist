@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface ITaskService {
     Optional<Task> readOne(int id);
     List<Task> readAll();
-    Task save(TaskDto taskDto, int projectId);
+    Task save(TaskDto taskDto);
 }
