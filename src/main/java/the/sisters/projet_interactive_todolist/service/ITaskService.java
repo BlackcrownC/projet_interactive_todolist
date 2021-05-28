@@ -10,4 +10,6 @@ public interface ITaskService {
     Optional<Task> readOne(int id);
     List<Task> readAll();
     Task save(TaskDto taskDto);
+
+    Task save(Task task);
 }

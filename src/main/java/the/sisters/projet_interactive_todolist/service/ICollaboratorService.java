@@ -16,5 +16,8 @@ public interface ICollaboratorService {
     Collaborator save(Collaborator collaborator);
 
     void update(Collaborator collaborator);
-    Optional<Collaborator> findByEmail(String email);
+
+    void addTaskToCollab(int taskId, int collabId);
+
+    Collaborator findByEmail(String email);
 }

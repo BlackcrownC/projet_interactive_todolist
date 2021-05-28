@@ -15,9 +15,7 @@ import the.sisters.projet_interactive_todolist.service.implementation.ProjectSer
 import the.sisters.projet_interactive_todolist.service.implementation.TaskService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class TaskController {
@@ -37,7 +35,7 @@ public class TaskController {
 
     @PostMapping("/project/{project_id}/saveTask")
     public String addUser(@Valid TaskDto taskDto, @PathVariable int project_id){
-        taskDto.setProjectId(project_id);
+        taskDto.setProjectId(0);
         System.out.println(taskDto.toString());
         Task saved = taskService.save(taskDto);
         System.out.println("ok");
@@ -49,19 +47,20 @@ public class TaskController {
         model.addAttribute("newTask", new TaskDto());
         return "task/addTaskView";
     }
+
     @GetMapping("/project/{project_id}/task/{id}")
     public String getTask(Model model, @PathVariable int id,@PathVariable int project_id){
-        String path=null;
-        if(true){
-            path = "fragment/headerManager::top-nav";
+        boolean isManager;
+        if(collaboratorService.findByEmail("michel_racicot12@hotmail.ca").getCategories().contains(categoryService.readOne(0).get())){
+            isManager=true;
         }
         else {
-            path = "fragment/headerEmployee::top-nav";
+            isManager=false;
         }
         Optional<Task> task= taskService.readOne(id);
         model.addAttribute("project_id",project_id);
         model.addAttribute("task",task.get());
-        model.addAttribute("path", path);
+        model.addAttribute("isManager", isManager);
 
         return "task/taskDetailView";
 
@@ -71,10 +70,10 @@ public class TaskController {
     public String assignTask(Model model, @PathVariable int id,@PathVariable int project_id){
         List<Collaborator> allCollaborators = collaboratorService.readAll();
         List<Collaborator> collaborators = new ArrayList<Collaborator>();
-        Optional<Task> task= taskService.readOne(id);
+        Task task= taskService.readOne(id).get();
         for(Collaborator c : allCollaborators){
             if(!c.getTasks().contains(task)){
-                for(Category co:task.get().getCategories()){
+                for(Category co:task.getCategories()){
                     if(c.getCategories().contains(co)){
                         collaborators.add(c);
                         break;
@@ -87,33 +86,37 @@ public class TaskController {
         model.addAttribute("collaborators",collaborators);
 
         model.addAttribute("project_id",project_id);
-        model.addAttribute("task",task.get());
+        model.addAttribute("task",task);
 
         return "task/assignTaskView";
     }
     @PostMapping("/project/{project_id}/assignTask/{id}/{collaboratorId}")
-    public String postAssignTask(Model model, @PathVariable int id,@PathVariable int project_id,@PathVariable int collarboratorId){
-        List<Collaborator> allCollaborators = collaboratorService.readAll();
-        List<Collaborator> collaborators = new ArrayList<Collaborator>();
-        Optional<Task> task= taskService.readOne(id);
-        for(Collaborator c : allCollaborators){
-            if(!c.getTasks().contains(task)){
-                for(Category co:task.get().getCategories()){
-                    if(c.getCategories().contains(co)){
-                        collaborators.add(c);
-                        break;
-                    }
+    public String postAssignTask(@PathVariable int id,@PathVariable int project_id,@PathVariable int collaboratorId){
+        collaboratorService.addTaskToCollab(id,collaboratorId);
 
-                }
-            }
 
-        }
-        model.addAttribute("collaborators",collaborators);
-
-        model.addAttribute("project_id",project_id);
-        model.addAttribute("task",task.get());
-
-        return "redirect:task/assignTaskView";
+        return "redirect:/project/0/assignTask/"+id;
     }
+    @PostMapping("/project/{project_id}/task/addTime/{id}")
+    public String postAddWeek(@PathVariable int id,@PathVariable int project_id){
+        Task task = taskService.readOne(id).get();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(task.getEnd());
+        calendar.add(calendar.DAY_OF_YEAR, 7);
+        Date date = calendar.getTime();
+        task.setEnd(date);
+        taskService.save(task);
+        return "redirect:/project/0/task_list/";
+    }
+    @PostMapping("/project/0/task/completed/{id}")
+    public String postCompletedTask(@PathVariable int id){
+        Task task = taskService.readOne(id).get();
+        task.setCompleted(true);
+        taskService.save(task);
+        if(collaboratorService.findByEmail("michel_racicot12@hotmail.ca").getCategories().contains(categoryService.readOne(0).get())){
+            return "redirect:/project/0/taskList/";
+        }
+        else return "redirect:/project/0/employee/";
 
+    }
 }

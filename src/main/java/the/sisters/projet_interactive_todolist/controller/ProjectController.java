@@ -55,8 +55,8 @@ public class ProjectController {
 
     @GetMapping("/project/{project_id}/employee")//for employee
     public String getAllTaskForEmployee(Model model/*, @AuthenticationPrincipal String email*/){
-
-        List<Task> tasks = taskService.readAll();
+        Collaborator collaborator = collaboratorService.findByEmail("michel_racicot12@hotmail.ca");
+        List<Task> tasks = collaborator.getTasks();
 
         model.addAttribute("tasks", tasks);
 
@@ -67,8 +67,8 @@ public class ProjectController {
     }
     @GetMapping("/project")
     public String getProjects(Model model/*, @AuthenticationPrincipal String email*/){
-        Optional<Collaborator> collaborator = collaboratorService.findByEmail("michel@hotmail.ca");
-        model.addAttribute("allProject", collaborator.get().getProjects());
+        Collaborator collaborator = collaboratorService.findByEmail("michel_racicot12@hotmail.ca");
+        model.addAttribute("allProject", collaborator.getProjects());
         return "/project/projectView";
     }
 }

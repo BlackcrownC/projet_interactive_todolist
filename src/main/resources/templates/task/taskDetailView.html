@@ -9,14 +9,26 @@
 </head>
 <body>
 <!-- HEADER -->
-<div th:replace="fragment/headerManager::top-nav"></div>
+<div th:if="${isManager}==true">
+    <div  th:replace="fragment/headerManager::top-nav"></div></div>
+<div th:if="${isManager}==false">
+    <div  th:replace="fragment/headerEmployee::top-nav"></div></div>
+
+
 <!-- BODY -->
 <h1>Détail de la tâche : <span th:text="${task.taskId}"></span></h1>
 <p>Name: <span th:text="${task.name}"></span></p>
 <p>Start: <span th:text="${task.start}"></span></p>
 <p>End: <span th:text="${task.end}"></span></p>
-<p>Completed: <span th:text="${task.completed}"></span></p>
 <p>Description: <span th:text="${task.description}"></span></p>
+<div th:if="${!task.completed}">
+    <form method="post" th:action="@{'/project/0/task/completed'+${task.getTaskId()}}">
+        <button th:type="submit">Completed</button>
+    </form>
+</div>
+
+
+
 <!-- FOOTER -->
 <footer th:replace="fragment/footer::footer"></footer>
 </body>

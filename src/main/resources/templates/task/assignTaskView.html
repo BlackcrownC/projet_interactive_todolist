@@ -24,7 +24,10 @@
         <td th:text="${collab.getEmail()}"></td>
         <td th:text="${task.start}"></td>
         <td th:text="${task.end}"></td>
-        <td><button th:text="Assign" type="submit" th:method='POST' th:action="@{'/project/1/assignTask/'+${task.taskId}+'/'+${collab.getCollaboratorId()}}"></button></td>
+        <form method="post" th:action="@{'/project/1/assignTask/'+${task.taskId}+'/'+${collab.getCollaboratorId()}}">
+            <td><button th:text="Assign" type="submit" value="value" ></button></td>
+        </form>
+
 
     </tr>
 

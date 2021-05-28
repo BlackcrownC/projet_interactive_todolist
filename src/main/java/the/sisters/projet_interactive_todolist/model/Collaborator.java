@@ -14,8 +14,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "Collaborator.findOneByEmail", query = "SELECT c FROM Collaborator c WHERE c.email = :email")
+})
 @Entity
 @Table(name = "collaborator")
+
 public class Collaborator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

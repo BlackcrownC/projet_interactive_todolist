@@ -36,8 +36,12 @@
             <td th:text="${task.completed}" th:if="${task.end<currentDate}" style="background-color: red;opacity: 50%"></td>
             <td th:text="${task.completed}" th:if="${task.end>currentDate&&!task.isCompleted()}" style="background-color: yellow;opacity: 50%"></td>
             <td th:text="${task.completed}" th:if="${task.completed}" style="background-color: green;opacity: 50%"></td>
-            <td><a th:text="Add" th:href="${'/project/1/assignTask/'+task.taskId}"></a></td>
-            <td><a th:text="Assign" th:href="${'/project/1/task/'+task.taskId}"></a></td>
+            <td><a th:text="Descrition" th:href="${'/project/0/task/'+task.taskId}"></a></td>
+            <form method="post" th:action="@{'/project/0/task/addTime/'+${task.taskId}}">
+                <td><button th:text="Add" type="submit"></button></td>
+            </form>
+
+            <td><a th:text="Assign" th:href="${'/project/0/assignTask/'+task.taskId}"></a></td>
 
         </tr>
 
@@ -67,9 +71,11 @@
         <td th:text="${task.completed}" th:if="${task.end<currentDate}" style="background-color: red;opacity: 50%"></td>
         <td th:text="${task.completed}" th:if="${task.end>currentDate&&!task.isCompleted()}" style="background-color: yellow;opacity: 50%"></td>
         <td th:text="${task.completed}" th:if="${task.completed}" style="background-color: green;opacity: 50%"></td>
-        <td><a th:text="Descrition" th:href="${'/project/'+project_id+'/task/'+task.taskId}"></a></td>
-        <td><a th:text="Add" th:href="${'/project/1/task/'+task.taskId}"></a></td>
-        <td><a th:text="Assign" th:href="${'/project/1/assignTask/'+task.taskId}"></a></td>
+        <td><a th:text="Descrition" th:href="${'/project/0/task/'+task.taskId}"></a></td>
+        <form method="post" th:action="@{'/project/0/task/addTime/'+${task.taskId}}">
+            <td><button th:text="Add" type="submit"></button></td>
+        </form>
+        <td><a th:text="Assign" th:href="${'/project/0/assignTask/'+task.taskId}"></a></td>
     </tr>
 
     </tbody>

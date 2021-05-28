@@ -54,4 +54,8 @@ public class TaskService implements ITaskService {
         System.out.println(task.toString());
         return taskRepository.save(task);
     }
+    @Override
+    public Task save(Task task){
+        return taskRepository.save(task);
+    }
 }
