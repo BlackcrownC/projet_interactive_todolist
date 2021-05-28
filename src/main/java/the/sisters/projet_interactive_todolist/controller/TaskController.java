@@ -114,7 +114,7 @@ public class TaskController {
         task.setCompleted(true);
         taskService.save(task);
         if(collaboratorService.findByEmail("michel_racicot12@hotmail.ca").getCategories().contains(categoryService.readOne(0).get())){
-            return "redirect:/project/0/taskList/";
+            return "redirect:/project/0/task_list/";
         }
         else return "redirect:/project/0/employee/";
 

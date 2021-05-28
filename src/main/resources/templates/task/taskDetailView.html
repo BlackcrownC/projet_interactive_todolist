@@ -22,7 +22,7 @@
 <p>End: <span th:text="${task.end}"></span></p>
 <p>Description: <span th:text="${task.description}"></span></p>
 <div th:if="${!task.completed}">
-    <form method="post" th:action="@{'/project/0/task/completed'+${task.getTaskId()}}">
+    <form method="post" th:action="@{'/project/0/task/completed/'+${task.getTaskId()}}">
         <button th:type="submit">Completed</button>
     </form>
 </div>

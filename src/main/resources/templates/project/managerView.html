@@ -11,9 +11,9 @@
 <div th:replace="fragment/headerManager::top-nav"></div>
 <h1>ALL TASK</h1>
 <div th:each="collab:${collaborators}">
-    <h2 th:text="${collab.getFirstname()}"/>
+    <h2 th:text="${collab.getFirstname()}" style="width: 110px;background-color: aqua"/>
     <div th:each="categorie:${collab.getCategories()}">
-        <p th:text="${categorie.getName()}"></p>
+        <p th:text="${categorie.getName()} " style="width: 100px;background-color: orange"></p>
     </div>
     <table class="table table-hover">
         <thead class="text-warning" style="background-color: #03a9f3">
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
 
-        <tr th:each="task:${collab.getTasks()}">
+        <tr th:each="task:${collab.getTasks()}" style="background-color: grey">
             <td th:text="${task.taskId}"></td>
             <td th:text="${task.name}"></td>
             <td th:text="${task.start}"></td>
@@ -63,7 +63,7 @@
     </thead>
     <tbody>
 
-    <tr th:each="task:${tasksWithNoCollab}">
+    <tr th:each="task:${tasksWithNoCollab}" style="background-color: grey">
         <td th:text="${task.taskId}"></td>
         <td th:text="${task.name}"></td>
         <td th:text="${task.start}"></td>
