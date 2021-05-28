@@ -23,7 +23,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-        setFilterProcessesUrl("/api/login");
+        setFilterProcessesUrl("/login");
     }
 
     /* trigger when we issue POST request to /login We also need to pass in {"username":"","password":""} in the request body */

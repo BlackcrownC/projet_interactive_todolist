@@ -23,7 +23,7 @@ public class LoginController {
         this.collaboratorService = collaboratorService;
     }
 
-    @GetMapping
+    @GetMapping("")
     public String login(Model model) {
         return "login/login";
     }

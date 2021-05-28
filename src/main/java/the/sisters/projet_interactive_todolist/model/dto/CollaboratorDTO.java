@@ -10,8 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 public class CollaboratorDTO {
-    private Integer collaboratorId;
-
     private String firstname;
 
     private String lastname;

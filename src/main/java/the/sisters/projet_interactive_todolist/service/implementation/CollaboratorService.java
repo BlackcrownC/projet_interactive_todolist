@@ -2,13 +2,17 @@ package the.sisters.projet_interactive_todolist.service.implementation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import the.sisters.projet_interactive_todolist.model.Category;
 import the.sisters.projet_interactive_todolist.model.Collaborator;
 import the.sisters.projet_interactive_todolist.model.Task;
 import the.sisters.projet_interactive_todolist.model.dto.CollaboratorDTO;
 import the.sisters.projet_interactive_todolist.repository.Interfaces.ICollaboratorRepository;
 import the.sisters.projet_interactive_todolist.service.ICollaboratorService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +20,42 @@ import java.util.Optional;
 public class CollaboratorService implements ICollaboratorService {
     private final ICollaboratorRepository collaboratorRepository;
     private final TaskService taskService;
+    private final CategoryService categoryService;
     @Autowired
-    public CollaboratorService(ICollaboratorRepository collaboratorRepository, TaskService taskService) {
+    public CollaboratorService(ICollaboratorRepository collaboratorRepository, TaskService taskService, CategoryService categoryService) {
         this.collaboratorRepository = collaboratorRepository;
         this.taskService = taskService;
+        this.categoryService = categoryService;
     }
 
     @Override
     public Collaborator create(CollaboratorDTO collaborator) {
-        return null;
+        Collaborator newCollab = new Collaborator();
+
+        newCollab.setFirstname(collaborator.getFirstname());
+        newCollab.setLastname(collaborator.getLastname());
+        newCollab.setEmail(collaborator.getEmail());
+        newCollab.setPasswd(BCrypt.hashpw(collaborator.getPasswd(), BCrypt.gensalt()));
+
+        List<Category> categories = new ArrayList<>();
+
+        if (collaborator.getCategories()[0])
+            categories.add(categoryService.readOne(0).get());
+        if (collaborator.getCategories()[1])
+            categories.add(categoryService.readOne(1).get());
+        if (collaborator.getCategories()[2])
+            categories.add(categoryService.readOne(2).get());
+
+        if (collaborator.getCategories()[3]) {
+            newCollab.setRoles("MANAGER");
+            categories.add(categoryService.readOne(3).get());
+        }
+        else
+            newCollab.setRoles("USER");
+
+        newCollab.setCategories(categories);
+
+        return collaboratorRepository.save(newCollab);
     }
 
     @Override
